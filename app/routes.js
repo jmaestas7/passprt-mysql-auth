@@ -4,7 +4,7 @@ module.exports = function (app, passport) {
     // =====================================
     // HOME PAGE (with login links) ========
     // =====================================
-    app.get('/', function (req, res) {
+    app.get('/', isLoggedOut, function (req, res) {
         res.render('index.ejs'); // load the index.ejs file
     });
 
@@ -12,7 +12,7 @@ module.exports = function (app, passport) {
     // LOGIN ===============================
     // =====================================
     // show the login form
-    app.get('/login', function (req, res) {
+    app.get('/login', isLoggedOut, function (req, res) {
         // render the page and pass in any flash data if it exists
         res.render('login.ejs', { message: req.flash('loginMessage') });
     });
@@ -28,7 +28,7 @@ module.exports = function (app, passport) {
     // SIGNUP ==============================
     // =====================================
     // show the signup form
-    app.get('/signup', function (req, res) {
+    app.get('/signup', isLoggedOut, function (req, res) {
 
         // render the page and pass in any flash data if it exists
         res.render('signup.ejs', { message: req.flash('signupMessage') });
@@ -67,7 +67,7 @@ module.exports = function (app, passport) {
     // locally --------------------------------
     // LOGIN ===============================
     // show the login form
-    app.get('/login', function (req, res) {
+    app.get('/login', isLoggedOut, function (req, res) {
         res.render('login.ejs', { message: req.flash('loginMessage') });
     });
 
@@ -80,7 +80,7 @@ module.exports = function (app, passport) {
 
     // SIGNUP =================================
     // show the signup form
-    app.get('/signup', function (req, res) {
+    app.get('/signup', isLoggedOut, function (req, res) {
         res.render('signup.ejs', { message: req.flash('signupMessage') });
     });
 
@@ -104,6 +104,8 @@ module.exports = function (app, passport) {
         failureFlash: true // allow flash messages
     }));
 };
+
+
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
     // if user is authenticated in the session, carry on 
@@ -111,4 +113,13 @@ function isLoggedIn(req, res, next) {
         return next();
     // if they aren't redirect them to the home page
     res.redirect('/');
+}
+
+// route middleware to make sure a user is logged out to prevent accessing login or signup page
+function isLoggedOut(req, res, next) {
+    // if user isn't authenticated in the session, carry on 
+    if (!req.isAuthenticated())
+        return next();
+    // if they are redirect them to the profile page
+    res.redirect('/profile');
 }
