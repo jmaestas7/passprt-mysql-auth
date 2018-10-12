@@ -1,0 +1,32 @@
+{
+  "name": "passprt-mysql-auth",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jmaestas7/passprt-mysql-auth.git"
+  },
+  "author": "Jarred Maestas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jmaestas7/passprt-mysql-auth/issues"
+  },
+  "homepage": "https://github.com/jmaestas7/passprt-mysql-auth#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "connect-flash": "^0.1.1",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "morgan": "^1.9.1",
+    "mysql": "^2.16.0",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0"
+  }
+}
